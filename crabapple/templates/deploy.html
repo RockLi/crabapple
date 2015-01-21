@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crabapple - An automatic deployment tool integrated with Github</title>
+    <script src="/static/js/libs/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="/static/css/foundation.css">
+    <!-- This is how you would link your custom stylesheet -->
+    <!-- <link rel="stylesheet" href="css/app.css"> -->
+    <script src="/static/js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+    <div class="fixed">
+      <nav class="top-bar" data-topbar role="navigation">
+        <ul class="title-area">
+          <li class="name">
+            <h1><a href="/">Crabapple</a></h1>
+          </li>
+        </ul>
+
+        <section class="top-bar-section">
+          <!-- Right Nav Section -->
+          <ul class="right"  style="margin-right:20px;">
+            <li><a href="/deploy" class="button">Deploy Now!</a></li>
+          </ul>
+
+          <!-- Left Nav Section -->
+          <ul class="left">
+            <li class="active"><a href="/deployments">Deployments</a></li>
+            <li><a href="/specs">Specs</a></li>
+          </ul>
+        </section>
+      </nav>
+    </div>
+
+    <form style="margin-top:100px;" method="POST" action="/deploy">
+      <div class="row">
+        <div class="small-8">
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="right-label" class="right">Spec</label>
+            </div>
+            <div class="small-9 columns">
+              <select name="spec">
+                {% for spec in specs %}
+                <option value="{{ spec.id }}">{{ spec.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-8">
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="right-label" class="right">Commit</label>
+            </div>
+            <div class="small-9 columns">
+              <input type="text" name="commit" placeholder="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-8">
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="right-label" class="right"></label>
+            </div>
+            <div class="small-9 columns">
+              <button class="button success radius">Deploy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <footer class="row" style="position:fixed;bottom:10px;">
+      <div class="large-12 columns">
+        <div class="row">
+          <p style="text-align:center;">
+            An open source software released by <a href="http://www.starfruit.io">starfruit.io</a>.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="/static/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>

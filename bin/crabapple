@@ -1,0 +1,84 @@
+#!/usr/bin/env python
+
+# Copyright 2014 The crabapple Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+import sys
+import getopt
+import os
+
+from crabapple.exception import InvalidArgsException
+from crabapple.deploy import Deployer
+from crabapple.server import Server
+from crabapple.command import cmd_new
+from crabapple.command import cmd_server
+from crabapple.command import cmd_deploy
+from crabapple.helper import shell
+
+subcommands = {}
+
+def patch_spec_parser_globals():
+    import __builtin__
+    __builtin__.crabapple_run_shell_script = lambda x: shell.script(x)()
+
+
+def show_help(subcommand=None):
+    msg = '''crabapple: A simple automatically deployment tool integrated with Github
+
+crabapple subcommand [args]
+
+Subcommands:
+
+new    - generate a skeleton deployment spec for your project
+server - start a web server to monitor all events from Github
+deploy - do the deployment
+help   - show this help message
+
+
+Quicktips:
+
+crabapple help subcommand - Display the detailed help message for one subcommand
+'''
+    cmd = subcommands.get(subcommand, None)
+    if cmd is not None:
+        print cmd[1]
+    else:
+        print msg
+
+
+def register_cmd(name):
+    from crabapple import command
+    m = getattr(command, 'cmd_' + name)
+    subcommands[name] = [m.work, m.help_msg]
+
+
+for cmd in ['new', 'server', 'deploy']:
+    register_cmd(cmd)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) <= 1:
+        show_help()
+        sys.exit(1)
+
+    subcommand = sys.argv[1]
+    if subcommand == 'help':
+        for arg in sys.argv[2:]:
+            show_help(arg)
+        sys.exit(0)
+
+    handler = subcommands.get(subcommand, None)
+    if handler is None:
+        print 'Subcommand %s not found!' % (subcommand)
+        show_help()
+        sys.exit(1)
+
+    sys.dont_write_bytecode = True
+
+    try:
+        patch_spec_parser_globals()
+        handler[0](sys.argv[2:])
+    except InvalidArgsException():
+        show_help(subcommand)
+        sys.exit(2)

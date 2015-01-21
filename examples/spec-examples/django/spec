@@ -1,0 +1,45 @@
+# Syntax version of this spec file
+syntax_version = '1.0'
+
+# Name of your project
+name = 'demo-django-app'
+
+# Repo URL of Github
+repo_url = 'http://github.com/demo-django-app/demo-django-app'
+
+# Watched Branches
+watched_branches = ['master']
+
+# Notifiers: email, irc
+# notifiers = ['email']
+
+# Email notifier
+# notifier_email = {
+#    'sender': {
+#        'protocol': 'SMTP',
+#        'host': 'smtp.gmail.com',
+#        'port': 587,
+#        'user': 'demo@example.com',
+#        'password': '******',
+#    },
+#    'recipients': ['demo@example.com']
+#}
+
+# Testing
+def _on_test():
+    return crabapple_run_shell_script('./scripts/test.sh')
+
+on_test = _on_test
+
+# Timeout
+test_timeout = 0
+
+
+# Deployment
+def _on_deploy():
+    return crabapple_run_shell_script('./scripts/deploy.sh')
+
+on_deploy = _on_deploy
+
+# Timeout
+deploy_timeout = 0

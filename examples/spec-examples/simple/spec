@@ -1,0 +1,58 @@
+# Syntax version of this spec file
+syntax_version = '1.0'
+
+# Name of your project
+name = 'demo'
+
+# Repo URL of Github
+repo_url = 'http://github.com/demo/demo'
+
+# Watched Branches
+watched_branches = ['master']
+
+# Notifiers: email, irc
+notifiers = []
+
+# Email notifier
+# notifier_email = {
+#    'sender': {
+#        'host': 'smtp.gmail.com',
+#        'ssl': True,
+#        'port': 587,
+#        'user': 'demo@gmail.com',
+#        'password': '******',
+#        'address': 'demo@gmail.com'
+#    },
+#    'recipients': ['demo@demo.com']
+#}
+
+# notifier_irc = {
+#     'sender': {
+#         'host': 'irc.starfruit.io',
+#         'port': 6667,
+#         'ssl': True,
+#         'password': '',
+#         'channel': 'deployment',
+#         'nick': 'crabapple',
+#     }
+# }
+
+# Called when we try to run the testing
+def _on_test():
+    # Non-zero and not None means the testing is failed
+    print 'run my tests'
+
+on_test = _on_test
+
+# Timeout for one deployment, 0 means no limitations
+test_timeout = 0
+
+# Triggered when try to do the deployment
+def _on_deploy():
+    # Non-zero and not None means the deployment is failed
+    print 'run my deployment'
+
+on_deploy = _on_deploy
+
+# Timeout for one deployment, 0 means no limitations
+deploy_timeout = 0

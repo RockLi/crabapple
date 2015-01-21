@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crabapple - An automatic deployment tool integrated with Github</title>
+    <script src="/static/js/libs/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="/static/css/foundation.css">
+    <script src="/static/js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+    <div class="fixed">
+      <nav class="top-bar" data-topbar role="navigation">
+        <ul class="title-area">
+          <li class="name">
+            <h1><a href="/">Crabapple</a></h1>
+          </li>
+        </ul>
+
+        <section class="top-bar-section">
+          <!-- Right Nav Section -->
+          <ul class="right" style="margin-right:20px;">
+            <li><a href="/deploy" class="button">Deploy Now!</a></li>
+          </ul>
+
+          <!-- Left Nav Section -->
+          <ul class="left">
+            <li><a href="/deployments">Deployments</a></li>
+            <li class="active"><a href="/specs">Specs</a></li>
+          </ul>
+        </section>
+      </nav>
+    </div>
+
+    <div class="row" style="margin-top:100px;">
+      <table id="spec-list" style="width:100%;">
+        <thead>
+          <tr>
+            <th width="50">#</th>
+            <th>Name</th>
+            <th>Path</th>
+            <th>Repo</th>
+            <th>Branches</th>
+            <th>Notifiers</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for spec in specs|reverse %}
+          <tr>
+            <td><span style="font-weight:bold;">{{ spec.id }}</span></td>
+            <td>{{ spec.name }}</td>
+            <td>{{ spec.path }}</td>
+            <td><a href="{{ spec.repo_url }}" target="_blank">{{ spec.repo_url }}</a></td>
+            <td>{% for branch in spec.watched_branches %}{{ branch }}<br />{% endfor %}</td>
+            <td>
+              {% if notifiers %}
+              {% for notifier in spec.notifiers %}{{ notifier.name }}{% endfor %}
+              {% else %}
+              -
+              {% endif %}
+            </td>
+            <td>
+              {% if spec.enabled %}
+              <span class="label success radius">Enabled</span>
+              {% else %}
+              <span class="label secondary radius">Disabled</span>
+              {% endif %}
+            </td>
+            <td>
+              {% if spec.enabled %}
+              <a href="/spec/{{ spec.id }}/enable" style="margin-top:18px;" class="button radius tiny">Disable</a>
+              {% else %}
+              <a href="/spec/{{ spec.id }}/enable" style="margin-top:18px;" class="button radius tiny">Enable</a>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <footer class="row">
+      <div class="large-12 columns">
+        <div class="row">
+          <p style="text-align:center;">
+            An open source software released by <a href="http://www.starfruit.io">starfruit.io</a>.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/static/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>
