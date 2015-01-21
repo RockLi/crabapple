@@ -6,12 +6,12 @@ A highly configurable automatic deployment tool integrated with Github. It has l
 Mission
 ========
 
-To simplify your deployment at the early stage of your business and make you focused on building your products. 
+To simplify your deployment at the early stage of your business and make you focused on building your products.
 
 Status
 =======
 
-~~IDEA~~ -> ~~POC~~ -> **Alpha** 
+~~IDEA~~ -> ~~POC~~ -> **Alpha**
 
 Read more about our definition of status at [starfruit.io](http://blog.starfruit.io/definition-of-status).
 
@@ -117,13 +117,13 @@ Use ```crabapple help subcommand``` to show the detailed explaination for specif
    --admin      : Enable the Admin UI
    --logdir     : Directory to put all the logs
    --datadir    : Directory To store all the persistent data
-   --store      : Persistent way, default to sqlite 
+   --store      : Persistent way, default to sqlite
    ```
 
    Examples:
 
    ```crabapple server --host 0.0.0.0 --port 50000 --daemon --spec myproj/spec```
-   
+
    ```crabapple server --config some_config_file```
 
 3. deploy
@@ -201,11 +201,11 @@ deploy_timeout = 0
 About
 =====
 
-An opensource project released by [Starfruit.io](starfruit.io). We build reuseable open source project for startups. 
+An opensource project released by [Starfruit.io](http://starfruit.io). We build reuseable open source project for startups.
 
-Donate
+Donation
 ======
 
-Feel free to buy us a cup of coffee to encourge us to deliver better open source projects.  
+Feel free to buy us a cup of coffee to encourge us to deliver better open source projects.
 
-
+[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png)](https://gratipay.com/RockLi/)
